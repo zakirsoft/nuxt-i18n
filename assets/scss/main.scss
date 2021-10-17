@@ -1,0 +1,679 @@
+@import "./custom_variables.scss";
+@import "node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100&display=swap');
+@import "node_modules/bootstrap/scss/bootstrap";
+
+
+
+@font-face {
+  font-family: 'Nunito', sans-serif;;
+  src: url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
+}
+@font-face {
+  font-family: 'Oxanium', sans-serif;
+  src: url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400&display=swap');
+}
+
+@font-face {
+  font-family: "DesignSystemB-300R";
+  src: url("../fonts/Design System B 300.ttf");
+}
+
+@font-face {
+  font-family: "DesignSystemA-500R";
+  src: url("../fonts/Design System A 500.ttf");
+}
+
+@font-face {
+  font-family: "BankGothic";
+  src: url("../fonts/BankGthd.ttf");
+}
+
+@font-face {
+  font-family: 'Mattbilko';
+  src: url("../fonts/Mattbilko.ttf");
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100&display=swap');
+  
+}
+
+@font-face {
+  font-family: 'Montserrat', sans-serif;
+  src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=block');
+}
+
+*{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body.modal-open {
+  overflow: hidden;
+}
+
+body.intro-open {
+  overflow: hidden;
+}
+
+#header,
+section,
+#footer {
+  overflow: hidden;
+  @supports (clip-path: circle(0%)) {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+ml-form-align-center{
+  padding: 0;
+}
+// Navigation
+.navbar-brand {
+  padding: 0 !important;
+  margin: 0;
+  max-width: 300px;  
+}
+.navbar.navbar-light.navbar-expand{
+  padding: 0 !important;
+}
+.tooltipin,
+.tooltip-inner {
+  border: none;
+  max-width: 300px;
+  font-size: 1.2em;
+  padding: 25px 25px;
+  color: cyan;
+  
+}
+.arrow:before{
+  position: absolute;
+  
+    display: block;
+    width: 1rem;
+    height: 1rem;
+ 
+}
+.arrow{
+  background-color: black;
+}
+
+$category-image-height: 335px;
+.main-navbar {
+
+ 
+  margin: 0;
+  font-family: "DesignSystemA-500R";
+
+  .nav-link {
+    font-size: 1.5rem;
+
+    &:after {
+      content: "";
+      display: block;
+      transform: scaleX(0);
+      border-top: 2px solid $body-color;
+      transition: 0.3s;
+    }
+
+    &:hover {
+      &:after {
+        transform: scaleX(1);
+      }
+
+      + .category-dropdown {
+        opacity: 1;
+        height: $category-image-height;
+      }
+    }
+  }
+
+  .category-dropdown {
+    left: 0;
+    right: 0;
+    z-index: 10;
+    height: 0;
+    opacity: 1;
+    transition: height 0.3s, opacity 0.7s;
+    will-change: opacity, height;
+
+    &:hover {
+      opacity: 1;
+      height: $category-image-height;
+    }
+  }
+
+  .category-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: $category-image-height;
+
+    .category-title-wrapper {
+      height: 47px;
+
+      img {
+        max-height: 75%;
+      }
+    }
+  }
+}
+#scroll-progress-container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: .5em;
+  background: transparent;
+  z-index: 10;
+
+  .scroll-progress {
+    height: .3em;
+    background-color: cyan;
+   
+  }
+}
+
+// Homepage Slider
+.slick-prev:before,
+.slick-next:before {
+  color: $body-color !important;
+}
+
+.slick-track {
+  display: flex !important;
+  align-items: center;
+}
+
+// Footer
+.fill-primary {
+  fill: theme-color("primary");
+}
+
+.unstyled-button {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+// Contact Page
+.contact-background {
+  
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+// Forms
+.input-group-text {
+  background: transparent;
+}
+
+$custom-border-radius: 30px;
+.custom-border-radius {
+  border-radius: $custom-border-radius;
+}
+
+.rounded-input {
+  .input-group-prepend {
+    .input-group-text {
+      border-top-left-radius: $custom-border-radius;
+      border-bottom-left-radius: $custom-border-radius;
+    }
+
+    + .form-control {
+      border-top-right-radius: $custom-border-radius;
+      border-bottom-right-radius: $custom-border-radius;
+      border-left: none;
+    }
+  }
+}
+
+.normalize-link {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+// About Us
+.advantages-icons {
+  svg {
+    width: 128px;
+  }
+}
+
+// Product Overview
+.buge-showcase {
+  background-image: url("/images/products/buge.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 700px;
+}
+
+.tractor-showcase {
+  background-image: url("/images/tractor-1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 700px;
+
+  @include media-breakpoint-down(xl) {
+    background-position: 70% center;
+  }
+}
+
+.scooter-showcase {
+  background-image: url("/images/scooter-1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 700px;
+}
+
+.truck-showcase {
+  background-image: url("/images/truck-1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center right;
+  height: 700px;
+
+  @include media-breakpoint-down(xl) {
+    background-position: center;
+  }
+}
+
+.bg-black {
+  background-color: $body-color;
+}
+
+.bg-transparent-lg {
+  @include media-breakpoint-down(lg) {
+    background-color: transparent !important;
+  }
+}
+
+.text-body-lg {
+  @include media-breakpoint-down(lg) {
+    color: $body-color !important;
+  }
+}
+
+.white-border-btn {
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.underline {
+  position: relative;
+
+  &:after {
+    content: "";
+    display: block;
+    border-top: 3px solid theme-color("primary");
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+}
+
+.btn {
+  text-transform: uppercase;
+}
+
+select {
+  border-radius: 0;
+  color: default-color;
+  padding: 1rem 3rem 1rem 1rem;
+  border: 1px solid transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 50'><polygon fill='rgb(108, 92, 255)' points='0,0 100,0 50,50'/></svg>") no-repeat;
+  background-size: 12px;
+  background-position: calc(100% - 1rem) center;
+  background-repeat: no-repeat;
+  text-transform: uppercase;
+  transition: border-color .3s;
+  cursor: pointer;
+
+  &:hover {
+    border-color: default-color;
+  }
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+
+.product-detail-slider {
+  .slick-slide img {
+    max-height: 500px;
+   
+    margin: 0;
+    display: block !important;
+  }
+  margin-bottom: 30px;
+}
+
+//.carousel-indicators li {
+//    margin-top: 0;
+//}
+// Carousel Custom Design end
+
+// Design for special button 1 white
+
+.spec-button-container {
+  display: block;
+  background-color: transparent;
+  color: #007bff;
+  text-decoration: none;
+  width: max-content;
+  white-space: nowrap;
+}
+
+.spec-button {
+  display: inline-block;
+  text-transform: uppercase;
+  border: 2px solid #ffffff;
+  background-color:   #99999991;
+  color: #0c0c0c !important;
+  font-size: 1.2rem !important;
+  font-weight: 700;
+  line-height: 26px !important;
+
+  letter-spacing: 1px;
+  padding: 11px 54px !important;
+  position: relative;
+  max-width: fit-content;
+  cursor: pointer;
+  box-sizing: content-box;
+  white-space: nowrap;
+}
+
+.spec-button::before {
+  display: block;
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  transition: 0.5s all;
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid rgb(0, 0, 0);
+  border-left: 2px solid rgb(0, 0, 0);
+}
+
+.spec-button span::before {
+  display: block;
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  transition: 0.5s all;
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 2px solid rgb(0, 0, 0);
+  border-left: 2px solid rgb(0, 0, 0);
+}
+
+.spec-button span::after {
+  display: block;
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  transition: 0.5s all;
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid rgb(0, 0, 0);
+  border-right: 2px solid rgb(0, 0, 0);
+}
+
+.spec-button::after {
+  display: block;
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  transition: 0.5s all;
+  top: -1px;
+  right: -1px;
+  border-top: 2px solid rgb(0, 0, 0);
+  border-right: 2px solid rgb(0, 0, 0);
+}
+
+.spec-button:hover::before {
+  border-top: 2px solid rgb(0, 0, 0);
+  border-left: 2px solid rgb(0, 0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+.spec-button:hover::after {
+  border-top: 2px solid rgb(0, 0, 0);
+  border-right: 2px solid rgb(0, 0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+.spec-button:hover span::before {
+  border-bottom: 2px solid rgb(0, 0, 0);
+  border-left: 2px solid rgb(0, 0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+.spec-button:hover span::after {
+  border-bottom: 2px solid rgb(0, 0, 0);
+  border-right: 2px solid rgb(0, 0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+// Design ending for special button
+
+// Design for special button2 whitebg
+
+.spec-button-container2 {
+  display: block;
+  background-color: transparent;
+  color: #ffffff;
+  text-decoration: none;
+  width: max-content;
+  white-space: nowrap;
+}
+
+.spec-button2 {
+  display: inline-block;
+  text-transform: uppercase;
+  border: 1px solid #ffffff;
+  background-color: transparent !important;
+  color: #ffffff !important;
+  font-size: 1rem !important;
+  font-weight: 700;
+  line-height: 26px !important;
+  letter-spacing: 1px;
+  padding: 11px 54px !important;
+  position: relative;
+  max-width: fit-content;
+  cursor: pointer;
+  box-sizing: content-box;
+  white-space: nowrap;
+}
+
+.spec-button2::before {
+  display: block;
+  content: "";
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  transition: 0.5s all;
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+}
+
+.spec-button2 span::before {
+  display: block;
+  content: "";
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  transition: 0.5s all;
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 2px solid #fff;
+  border-left: 2px solid #fff;
+}
+
+.spec-button2 span::after {
+  display: block;
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  transition: 0.5s all;
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
+
+.spec-button2::after {
+  display: block;
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  transition: 0.5s all;
+  top: -1px;
+  right: -1px;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+}
+
+.spec-button2:hover::before {
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #fafafa;
+  width: 100%;
+  height: 100%;
+}
+
+.spec-button2:hover::after {
+  border-top: 1px solid #fcfffd;
+  border-right: 1px solid #f8f8f8;
+  width: 100%;
+  height: 100%;
+}
+
+.spec-button2:hover span::before {
+  border-bottom: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  width: 100%;
+  height: 100%;
+}
+
+.spec-button2:hover span::after {
+  border-bottom: 1px solid #ffffff;
+  border-right: 1px solid #fbfbfb;
+  width: 100%;
+  height: 100%;
+}
+
+// Design ending for special button2
+
+// Design ending for special button
+
+.btn-color-picker {
+  width: 25px;
+  height: 25px;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.justify-content-evenly {
+  justify-content: space-evenly;
+}
+
+.display-1 {
+  @media (max-width: 1445px) {
+    font-size: 4rem;
+  }
+
+  @include media-breakpoint-down(sm) {
+    font-size: 2.5rem;
+  }
+}
+
+// navigation link underline when link is active
+
+.main-navbar a.nuxt-link-exact-active:after {
+  border-top: 2px solid black;
+  transform: scale(1);
+}
+.nav-tabs .nav-link {
+  border: none;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  background-color: transparent;
+
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  color: cyan;
+  font-size: 1.5em;
+  size: 1.2em;
+
+}
+
+  .nav-link.active{
+    color: cyan;
+  }
+  @media only screen and (max-width: 600px) {
+    .tooltipin,
+.tooltip-inner {
+  border: none;
+  padding: 15px 25px;
+  color: cyan;
+  max-width: 200px;
+  font-size: 1em;
+  
+}
+.arrow:before{
+  position: absolute;
+    
+    display: block;
+    width: 1rem;
+    height: 1rem;
+ 
+}
+.arrow{
+  background-color: black;
+}
+  }
+  

@@ -1,0 +1,32 @@
+// colors
+$theme-colors: (
+    'primary': #36384593,
+    'secondary': #000000,
+);
+
+$body-color: #030101;
+$link-color: #cacaca;
+$text-muted: #60635e;
+
+// general
+$enable-rounded: true;
+
+$font-family-sans-serif: 'BankGothic', -apple-system, BlinkMacSystemFont, 
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', 'Montserrat';
+
+// spacer
+$spacers: (
+    col: 15px,
+);
+
+// Navigation
+$navbar-light-color: inherit;
+$navbar-light-hover-color: inherit;
+$navbar-light-active-color: inherit;
+
+$tooltipin: rgb(0, 0, 0);
+
+$tablet: 720px;
+$desktop: 1066px;
+$max-width: 1200px;

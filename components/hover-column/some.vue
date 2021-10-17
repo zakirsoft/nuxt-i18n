@@ -1,0 +1,224 @@
+<template>
+  <div>
+    <div
+      class="col-container"
+      id="first"
+      :slide="0"
+      :index="0"
+      @mouseleave="mouseLeave"
+      @mouseenter="mouseEnter('first')"
+    >
+      <div class="col-bg green1"></div>
+      <p class="center-xy">bug-e</p>
+    </div>
+    <div
+      class="col-container"
+      id="second"
+      :slide="1"
+      :index="1" 
+      @mouseleave="mouseLeave"
+      @mouseenter="mouseEnter('second')"
+    >
+      <div class="col-bg red"></div>
+      <p class="center-xy">
+        Some Tractor <br />
+        TExT
+      </p>
+    </div>
+    <div
+      class="col-container"
+      id="third"
+      :slide="2"
+      :index="2"
+      @mouseleave="mouseLeave"
+      @mouseenter="mouseEnter('third')"
+    >
+      <div class="col-bg blue"></div>
+      <p class="center-xy">Take<br />you're day to another level</p>
+    </div>
+    <div
+      class="col-container"
+      id="fourth"
+      :slide="3"
+      :index="3"
+      @mouseleave="mouseLeave"
+      @mouseenter="mouseEnter('fourth')"
+    >
+      <div class="col-bg green2"></div>
+      <p class="center-xy">How to Join</p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "HoverImages",
+  data() {
+    return {
+      slide: 0,
+    };
+  },
+  mounted() {
+    let $colContainer = $(".col-container");
+    let $colContainerTotal = $colContainer.length;
+    let $colBg = $(".col-bg");
+    let colMinScale = 1.3;
+    TweenMax.set(
+      $colContainer,
+      { width: "100" / $colContainerTotal + "vw" },
+      0
+    );
+    TweenMax.set($colBg, { scale: colMinScale }, 0); // avoid white edges by blur
+  },
+  methods: {
+    mouseEnter(id) {
+      let isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1; // detect firefox
+      let $colContainer = $(".col-container");
+      let $colContainerTotal = $colContainer.length;
+      let $colBg = $(".col-bg");
+      let colEase = Power2.easeOut;
+      var $thisContainer = $("#" + id);
+      var $ContainerExpandedWidth = 40; // TODO: improve formula to be dymamic
+      TweenMax.to(
+        $thisContainer,
+        0.6,
+        { width: $ContainerExpandedWidth + "vw", ease: colEase },
+        0
+      ); // this container will take up 50% width
+      TweenMax.to($thisContainer.find("p"), 0.6, { scale: 3 }, 0);
+      TweenMax.to($thisContainer.find($colBg), 0.6, { scale: 0.99 }, 0);
+      TweenMax.to(
+        $colContainer.not($thisContainer),
+        0.6,
+        { width: 100 / $colContainerTotal - 5 + "vw", ease: colEase },
+        0
+      ); // shrink other containers
+      TweenMax.to(
+        $colContainer.not($thisContainer).find("p"),
+        0.6,
+        { opacity: 0.3, scale: 0 },
+        0
+      );
+      TweenMax.to(
+        $colContainer.not($thisContainer).find($colBg),
+        0.6,
+        { scale: 1.4, rotation: 0.01, force3D: true },
+        0
+      );
+      if (!isFirefox) {
+        TweenMax.to(
+          $colContainer.not($thisContainer).find($colBg),
+          0.6,
+          { filter: "blur(5px)" },
+          0
+        ); // filter blur causes performance issues in firefox
+      }
+    },
+    mouseLeave() {
+      let $colContainer = $(".col-container");
+      let $colContainerTotal = $colContainer.length;
+      let $colBg = $(".col-bg");
+      let colEase = Power2.easeOut;
+      let colMinScale = 1.3;
+      TweenMax.to(
+        $colContainer,
+        0.6,
+        { width: 100 / $colContainerTotal + "vw", ease: colEase },
+        0
+      ); // default width
+      TweenMax.to($colContainer.find("p"), 0.6, { scale: 1, opacity: 2 }, 0);
+      TweenMax.to($colBg, 0.3, { scale: colMinScale }, 0);
+      TweenMax.to(
+        $colContainer.not(this).find($colBg),
+        0.6,
+        {
+          scale: colMinScale,
+          filter: "blur(0px)",
+          rotation: 0.01,
+          force3D: true,
+        },
+        0
+      );
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+// fonts
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800");
+html {
+  font-family: "Open Sans", sans-serif;
+  background: #f9f9f9;
+  box-sizing: border-box;
+  user-select: none;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+// helper
+.center-xy {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+// the good stuff
+.container {
+  height: 80vh;
+  width: 100%;
+}
+.col-container {
+  height: 80%;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  float: left;
+  .col-bg {
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 88vh;
+    content: "";
+    &:before {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgTWFjaW50b3NoIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjI4RkZBQTgzNzg1NzExRTU4NTQyODc3OUM4MTZGMUREIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjI4RkZBQTg0Nzg1NzExRTU4NTQyODc3OUM4MTZGMUREIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MjhGRkFBODE3ODU3MTFFNTg1NDI4Nzc5QzgxNkYxREQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MjhGRkFBODI3ODU3MTFFNTg1NDI4Nzc5QzgxNkYxREQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz66uHInAAAAIUlEQVR42mL5//8/AyMj42YGIGBigABfEMEIkoEBgAADAKvuBwVS8BAjAAAAAElFTkSuQmCC);
+      background-size: 1px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      opacity: 0.8;
+      content: "";
+    }
+  }
+  .red {
+    background: url("~assets/gecropt/h7.jpg") no-repeat center center/cover;
+  }
+  .green1 {
+    background: url("~assets/gecropt/hb1.jpg") no-repeat center center/cover;
+    // background-color: #00968767;
+  }
+  .green2 {
+    background: url("~assets/gecropt/h3.jpg") no-repeat left bottom/cover;
+  }
+  .blue {
+    background: url("~assets/gecropt/h2.jpg") no-repeat bottom center/cover;
+  }
+  p {
+    color: #fff;
+    text-align: center;
+  }
+}
+</style>

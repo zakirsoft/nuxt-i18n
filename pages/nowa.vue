@@ -1,0 +1,75 @@
+<template>
+  <div>
+    <div id="mainWrap">
+      <div class="cardCont">
+        <div class="cardBack"></div>
+        <div class="cardFront"></div>
+      </div>
+      <div class="cardCont">
+        <div class="cardBack"></div>
+        <div class="cardFront"></div>
+      </div>
+      <div class="cardCont">
+        <div class="cardBack"></div>
+        <div class="cardFront"></div>
+      </div>
+    </div>
+    <div style="clear: both"></div>
+
+    <div id="mainWrap" style="margin-top: 10px">
+      <div class="cardCont">
+        <div class="cardBack playcardBack"></div>
+        <div class="cardFront playcardFront"></div>
+      </div>
+      <div class="cardCont">
+        <div class="cardBack playcardBack"></div>
+        <div class="cardFront playcardFront"></div>
+      </div>
+      <div class="cardCont">
+        <div class="cardBack playcardBack"></div>
+        <div class="cardFront playcardFront"></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {},
+};
+</script>
+
+<style lang="scss" scoped>
+body {
+  background: #444;
+}
+.cardCont {
+  width: 250px;
+  height: 400px;
+  float: left;
+  margin-right: 10px;
+  position: relative;
+  /*border:solid 2px #fff;*/
+}
+.cardFront,
+.cardBack {
+  position: absolute;
+  width: 250px;
+  height: 400px;
+  background: url("https://s.cdpn.io/33073/lorempixel.jpg");
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+}
+.cardBack {
+  background: url("https://s.cdpn.io/33073/lorempixe1l.jpg");
+}
+
+.playcardFront {
+  background: url("http://unlimitedpotentialnow.com/wp-content/uploads/2012/01/Bouquet-cs.jpg");
+}
+.playcardBack {
+  background: url("http://i203.photobucket.com/albums/aa158/Comic1111/ACe.png");
+}
+</style>
