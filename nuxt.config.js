@@ -271,7 +271,15 @@ export default {
             {
                 code: "fr",
                 name: "Français"
-            }
+            },
+            {
+                code: "hi",
+                name: "Hindi"
+            },
+            {
+                code: "ar",
+                name: "Arabic"
+            },
         ],
         defaultLocale: "en",
         vueI18n: {
@@ -285,7 +293,13 @@ export default {
                 },
                 es: {
                     welcome: "Bienvenido"
-                }
+                },
+                hi: {
+                    welcome: "स्वागत"
+                },
+                ar: {
+                    welcome: "أهلا بك"
+                },
             }
         }
     },
